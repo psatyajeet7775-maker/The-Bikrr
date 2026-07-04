@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}The Bikrr | Add Service{% endblock %}
+
+{% block content %}
+<section class="form-panel wide">
+    <h1>Add Service</h1>
+    <form method="post">
+        <div class="form-grid">
+            <div>
+                <label for="bike_id">Bike</label>
+                <select id="bike_id" name="bike_id" required>
+                    {% for bike in bikes %}
+                        <option value="{{ bike['id'] }}">{{ bike["company_name"] }} {{ bike["model_name"] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label for="previous_service_date">Previous Service Date</label>
+                <input id="previous_service_date" name="previous_service_date" type="date" required>
+            </div>
+        </div>
+
+        <label for="notes">Previous Service Details</label>
+        <textarea id="notes" name="notes" rows="4"></textarea>
+
+        <button class="button" type="submit">Add Service</button>
+    </form>
+</section>
+{% endblock %}

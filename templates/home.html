@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}The Bikrr | Home{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div>
+        <p class="eyebrow">Bike service planner</p>
+        <h1>Keep your bike details and service dates ready.</h1>
+        <p class="hero-copy">Add a bike, enter the previous service date, and The Bikrr estimates the next general service and oil change window.</p>
+        <div class="hero-actions">
+            <a class="button" href="{{ url_for('add_bike') }}">Add Bike</a>
+            <a class="button button-secondary" href="{{ url_for('add_service') }}">Add Service</a>
+        </div>
+    </div>
+</section>
+
+<section class="section-heading">
+    <h2>Your Bikes</h2>
+    <a href="{{ url_for('add_bike') }}">Add bike</a>
+</section>
+
+{% if bikes %}
+<div class="bike-grid">
+    {% for bike in bikes %}
+    <article class="card">
+        <div class="card-top">
+            <h3>{{ bike["company_name"] }} {{ bike["model_name"] }}</h3>
+            <span>{{ "{:,}".format(bike["odo_meter"] or 0) }} km</span>
+        </div>
+        <p>Manufacturing year: {{ bike["manufacturing_year"] }}</p>
+        <p>Estimated mileage: {{ "%.2f"|format(bike["estimated_mileage"] or 0) }} km/l</p>
+
+        {% if bike["previous_service_date"] %}
+            <div class="service-summary">
+                <p><strong>Previous service:</strong> {{ bike["previous_service_date"] }}</p>
+                <p><strong>Next service:</strong> {{ bike["next_service_date"] }}</p>
+                <p><strong>Oil change:</strong> {{ bike["oil_change_start_date"] }} to {{ bike["oil_change_end_date"] }}</p>
+            </div>
+        {% else %}
+            <p class="muted">No service estimate added yet.</p>
+        {% endif %}
+
+        <div class="card-actions">
+            <a class="button button-small" href="{{ url_for('add_service') }}">Add Service</a>
+        </div>
+    </article>
+    {% endfor %}
+</div>
+{% else %}
+<div class="empty-state">
+    <h2>No bikes yet</h2>
+    <p>Add your first bike to start planning services.</p>
+    <a class="button" href="{{ url_for('add_bike') }}">Add Bike</a>
+</div>
+{% endif %}
+{% endblock %}

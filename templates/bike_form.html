@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}The Bikrr | Add Bike{% endblock %}
+
+{% block content %}
+<section class="form-panel wide">
+    <h1>Add Bike</h1>
+    <form method="post">
+        <div class="form-grid">
+            <div>
+                <label for="model_name">Bike Model Name</label>
+                <input id="model_name" name="model_name" required>
+            </div>
+            <div>
+                <label for="manufacturing_year">Manufacturing Year</label>
+                <input id="manufacturing_year" name="manufacturing_year" type="number" min="1900" max="2100" required>
+            </div>
+            <div>
+                <label for="company_name">Company Name</label>
+                <input id="company_name" name="company_name" required>
+            </div>
+            <div>
+                <label for="odo_meter">ODO Meter</label>
+                <input id="odo_meter" name="odo_meter" type="number" min="0" value="0" required>
+            </div>
+            <div>
+                <label for="estimated_mileage">Estimated Mileage</label>
+                <input id="estimated_mileage" name="estimated_mileage" type="number" min="0" step="0.01" value="0" required>
+            </div>
+        </div>
+
+        <button class="button" type="submit">Add Bike</button>
+    </form>
+</section>
+{% endblock %}

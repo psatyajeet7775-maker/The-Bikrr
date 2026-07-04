@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}The Bikrr | Database Error{% endblock %}
+
+{% block content %}
+<section class="form-panel wide">
+    <h1>Database connection error</h1>
+    <p>The Bikrr could not connect to MySQL/MariaDB.</p>
+
+    <div class="service-summary">
+        <p><strong>Host:</strong> {{ host }}</p>
+        <p><strong>Port:</strong> {{ port }}</p>
+        <p><strong>Database:</strong> {{ database }}</p>
+        <p><strong>User:</strong> {{ user }}</p>
+    </div>
+
+    <p class="muted">Start MySQL in XAMPP/WAMP, then check the database username, password, and port.</p>
+    <p class="muted">{{ error }}</p>
+</section>
+{% endblock %}
